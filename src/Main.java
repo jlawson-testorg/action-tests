@@ -7,6 +7,6 @@ public class Main {
     }
 
     public static void foo() {
-        System.out.println("bar");
+        System.out.println("bar bar");
     }
 }
