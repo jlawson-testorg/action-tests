@@ -27,6 +27,7 @@ jobs:
           development_branch: "${{env.nextRelease}}"
           push_token: 'ACCESS_TOKEN'
           allow_forks: true
+          allow_ff: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -40,6 +41,7 @@ jobs:
           development_branch: "${{env.nextRelease}}"
           push_token: 'ACCESS_TOKEN'
           allow_forks: true
+          allow_ff: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -53,6 +55,7 @@ jobs:
           development_branch: "main"
           push_token: 'ACCESS_TOKEN'
           allow_forks: true
+          allow_ff: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
