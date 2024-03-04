@@ -1,0 +1,66 @@
+name: 'Nightly Merge'
+
+on:
+  workflow_dispatch:
+jobs:
+  nightly-merge:
+    env:
+      currentRelease: 'current'
+      nextRelease: 'next'
+      patchVersion: 'patch'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+
+
+#merge up current release version
+      - name: "Merge ${{env.currentRelease}} into ${{env.nextRelease}}"
+        id: merge-current-release-to-next-release
+        uses: robotology/gh-action-nightly-merge@v1.3.3
+        with:
+          stable_branch: "${{env.currentRelease}}"
+          development_branch: "${{env.nextRelease}}"
+          push_token: 'ACCESS_TOKEN'
+          allow_forks: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        continue-on-error: true
+#merge patch version
+      - name: "Merge ${{env.nextRelease}}.${{env.patchVersion}} into ${{env.nextRelease}}"
+        id: merge-patch-version-to-next-release
+        uses: robotology/gh-action-nightly-merge@v1.3.3
+        with:
+          stable_branch: "${{env.nextRelease}}.${{env.patchVersion}}"
+          development_branch: "${{env.nextRelease}}"
+          push_token: 'ACCESS_TOKEN'
+          allow_forks: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        continue-on-error: true
+#merge up next release version
+      - name: "Merge ${{env.nextRelease}} into main"
+        id: merge-next-release-to-main
+        uses: robotology/gh-action-nightly-merge@v1.3.3
+        with:
+          stable_branch: "${{env.nextRelease}}"
+          development_branch: "main"
+          push_token: 'ACCESS_TOKEN'
+          allow_forks: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        continue-on-error: true
+
+      - name: "Send Slack alert"
+        run: |
+          echo "Current -> Next: ${{ steps.merge-current-release-to-next-release.outcome }}"
+          echo "Patch   -> Next: ${{ steps.merge-patch-version-to-next-release.outcome }}"
+          echo "Next    -> Main: ${{ steps.merge-next-release-to-main.outcome }}"
+        shell: pwsh
