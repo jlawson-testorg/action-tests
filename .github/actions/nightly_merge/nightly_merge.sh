@@ -62,14 +62,14 @@ if git merge-base --is-ancestor $STABLE_BRANCH $DEVELOPMENT_BRANCH; then
 fi;
 
 # Get the current date in mm/dd/yyyy format
-#DATE=$(date +"%m/%d/%Y")
+DATE=$(date +"%m/%d/%Y")
 
-#NEW_BRANCH="$STABLE_BRANCH_merge_into_$DEVELOPMENT_BRANCH_$DATE"
+NEW_BRANCH="$STABLE_BRANCH_merge_into_$DEVELOPMENT_BRANCH_$DATE"
 
-#git checkout -b $NEW_BRANCH origin/$DEVELOPMENT_BRANCH
+git checkout -b $NEW_BRANCH origin/$DEVELOPMENT_BRANCH
 
 # Do the merge
-#git merge $FF_MODE --no-edit $STABLE_BRANCH
+git merge $FF_MODE --no-edit $STABLE_BRANCH
 
 set +o xtrace
 echo
