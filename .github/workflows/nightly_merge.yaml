@@ -15,6 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           token: ${{ secrets.ACCESS_TOKEN }}
 
 
@@ -27,7 +28,7 @@ jobs:
           development_branch: "${{env.nextRelease}}"
           push_token: 'ACCESS_TOKEN'
           allow_forks: true
-          allow_ff: true
+#          allow_ff: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -41,7 +42,7 @@ jobs:
           development_branch: "${{env.nextRelease}}"
           push_token: 'ACCESS_TOKEN'
           allow_forks: true
-          allow_ff: true
+#          allow_ff: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -55,7 +56,7 @@ jobs:
           development_branch: "main"
           push_token: 'ACCESS_TOKEN'
           allow_forks: true
-          allow_ff: true
+#          allow_ff: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -63,6 +64,7 @@ jobs:
 
       - name: "Send Slack alert"
         run: |
+          echo
           echo "Current -> Next: ${{ steps.merge-current-release-to-next-release.outcome }}"
           echo "Patch   -> Next: ${{ steps.merge-patch-version-to-next-release.outcome }}"
           echo "Next    -> Main: ${{ steps.merge-next-release-to-main.outcome }}"

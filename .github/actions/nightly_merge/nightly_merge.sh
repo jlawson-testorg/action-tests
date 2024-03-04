@@ -84,4 +84,4 @@ if [[ $INPUT_GIT_LFS == "true" ]]; then
 fi
 
 # Push the branch
-git push origin $NEW_BRANCH:$DEVELOPMENT_BRANCH
+git push origin $STABLE_BRANCH:$DEVELOPMENT_BRANCH
