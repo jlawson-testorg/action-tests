@@ -26,7 +26,7 @@ jobs:
         with:
           stable_branch: "${{env.currentRelease}}"
           development_branch: "${{env.nextRelease}}"
-          push_token: 'ACCESS_TOKEN'
+          push_token: 'GITHUB_TOKEN'
           allow_forks: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,7 +39,7 @@ jobs:
         with:
           stable_branch: "${{env.nextRelease}}.${{env.patchVersion}}"
           development_branch: "${{env.nextRelease}}"
-          push_token: 'ACCESS_TOKEN'
+          push_token: 'GITHUB_TOKEN'
           allow_forks: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -52,7 +52,7 @@ jobs:
         with:
           stable_branch: "${{env.nextRelease}}"
           development_branch: "main"
-          push_token: 'ACCESS_TOKEN'
+          push_token: 'GITHUB_TOKEN'
           allow_forks: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
