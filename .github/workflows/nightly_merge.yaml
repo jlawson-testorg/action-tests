@@ -64,7 +64,6 @@ jobs:
 
       - name: "Send Slack alert"
         run: |
-          echo
           echo "Current -> Next: ${{ steps.merge-current-release-to-next-release.outcome }}"
           echo "Patch   -> Next: ${{ steps.merge-patch-version-to-next-release.outcome }}"
           echo "Next    -> Main: ${{ steps.merge-next-release-to-main.outcome }}"
