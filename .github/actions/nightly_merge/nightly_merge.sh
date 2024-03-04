@@ -44,7 +44,7 @@ else
   fi
 fi
 
-git remote set-url origin https://x-access-token:${!PUSH_TOKEN}@github.com/$GITHUB_REPOSITORY.git
+git remote set-url origin https://x-access-token:${!PUSH_TOKEN}@github.com/$GITHUB_REPOSITORY
 git config --global user.name "$USER_NAME"
 git config --global user.email "$USER_EMAIL"
 
